@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwToken", "JwToken\JwToken.csproj", "{48ABADBF-21A3-474E-AF88-20B75966020C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48ABADBF-21A3-474E-AF88-20B75966020C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48ABADBF-21A3-474E-AF88-20B75966020C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48ABADBF-21A3-474E-AF88-20B75966020C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48ABADBF-21A3-474E-AF88-20B75966020C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16F5AA92-42D5-4777-8C38-2B201D0A4D04}
+	EndGlobalSection
+EndGlobal
