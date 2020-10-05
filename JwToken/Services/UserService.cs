@@ -34,5 +34,16 @@ namespace JwToken.Services
         {
             return _context.Users.ToList();
         }
+
+        public void UpdateRefreshToken(int userId, string refreshToken, DateTime expirationDate)
+        {
+            var user = GetUser(userId);
+            if (user != null)
+            {
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpirationDate = expirationDate;
+                _context.SaveChanges();
+            }
+        }
     }
 }

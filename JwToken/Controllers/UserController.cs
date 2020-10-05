@@ -30,6 +30,7 @@ namespace JwToken.Controllers
         }
 
         [HttpGet]
+        [Route("")]
         public ActionResult<IEnumerable<UserModel>> GetUsers()
         {
             var result = _userService.GetUsers().WithoutPasswordHashes();
@@ -39,6 +40,8 @@ namespace JwToken.Controllers
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,
+                RefreshToken = u.RefreshToken,
+                RefreshTokenExpirationDate = u.RefreshTokenExpirationDate
             }));
         }
 

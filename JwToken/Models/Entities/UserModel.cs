@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace JwToken.Models.Entities
 {
@@ -13,5 +14,7 @@ namespace JwToken.Models.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpirationDate { get; set; }
     }
 }

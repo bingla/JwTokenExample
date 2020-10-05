@@ -1,6 +1,7 @@
 ﻿using JwToken.Interfaces;
 using JwToken.Models.Requests;
 using JwToken.Models.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwToken.Controllers
@@ -13,11 +14,11 @@ namespace JwToken.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly IAuthorizationService _authorizationService;
+        private readonly Interfaces.IAuthorizationService _authorizationService;
 
         public AuthController(
             IAuthenticationService authenticationService,
-            IAuthorizationService authorizationService)
+            Interfaces.IAuthorizationService authorizationService)
         {
             _authenticationService = authenticationService;
             _authorizationService = authorizationService;
@@ -30,12 +31,37 @@ namespace JwToken.Controllers
             if (!_authenticationService.ValidateUserPassword(model.Login, model.Password, out var user))
                 return Unauthorized();
 
+            var authTokens = _authorizationService.GenerateTokens(user);
+
             return new LoginResponse
             {
-                Login = model.Login,
-                UserId = user.Id,
-                Token = _authorizationService.GenerateJwToken(user)
+                UserId = authTokens.UserId,
+                Token = authTokens.Token,
+                Refresh = authTokens.Refresh,
             };
+        }
+
+        [HttpPost]
+        [Route("refresh")]
+        public ActionResult<RefreshAuthResponse> RefreshCredentials([FromBody] RefreshAuthRequest model)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var authTokens = _authorizationService.RefreshTokens(model.Token, model.Refresh);
+                return new RefreshAuthResponse
+                {
+                    UserId = authTokens.UserId,
+                    Token = authTokens.Token,
+                    Refresh = authTokens.Refresh,
+                };
+            }
+            catch
+            {
+                return Unauthorized();
+            }
         }
     }
 }
