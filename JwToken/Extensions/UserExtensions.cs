@@ -33,7 +33,7 @@ namespace JwToken.Extensions
         /// Hide RefreshTokens on Users by setting value to null
         /// </summary>
         /// <param name="users">List of users</param>
-        public static IEnumerable<UserModel> WithoutRefreshTokenInfos(this IEnumerable<UserModel> users)
+        public static IEnumerable<UserModel> WithoutRefreshTokenInfo(this IEnumerable<UserModel> users)
         {
             return users.Select(WithoutRefreshTokenInfo);
         }
