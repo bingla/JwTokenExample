@@ -1,4 +1,5 @@
-﻿using JwToken.Models.Entities;
+﻿using JwToken.Models.Authentication;
+using JwToken.Models.Entities;
 
 namespace JwToken.Interfaces
 {
@@ -8,5 +9,7 @@ namespace JwToken.Interfaces
     public interface IAuthorizationService
     {
         string GenerateJwToken(UserModel user);
+        AuthModel GenerateTokens(UserModel user);
+        AuthModel RefreshTokens(string token, string refreshToken);
     }
 }

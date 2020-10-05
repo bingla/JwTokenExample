@@ -1,4 +1,7 @@
-﻿namespace JwToken.Models.Responses
+﻿using Microsoft.VisualBasic;
+using System;
+
+namespace JwToken.Models.Responses
 {
     public class UserResponse
     {
@@ -6,5 +9,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpirationDate { get; set; }
     }
 }

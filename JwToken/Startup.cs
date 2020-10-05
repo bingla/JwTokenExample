@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using JwToken.Extensions;
 using JwToken.Interfaces;
 using JwToken.Services;
+using JwToken.Helpers;
 
 namespace JwToken
 {
@@ -39,6 +40,8 @@ namespace JwToken
             services.AddJwToken(secret);
 
             // Services
+            services.AddSingleton<IJWTokenGenerator, JWTokenGenerator>();
+            services.AddSingleton<IRefreshTokenGenerator, RefreshTokenGenerator>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             services.AddScoped<IUserService, UserService>();
