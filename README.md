@@ -23,12 +23,12 @@ body:
 	"password": "skywalker"
 }
 ````
-In the response body you'll find a property named ````token````, which contains a long string. This is your validation-token. 
+In the response body you'll find two properties named ````token```` and ````refresh````, which both contains long strings. These are your validation- and refresh-tokens respectively. 
 ````
 {
     "userId": 1,
-    "login": "luke.skywalker@skywalker-ranch.com",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJsdWtlLnNreXdhbGtlckBza3l3YWxrZXItcmFuY2guY29tIiwibmJmIjoxNTgwOTc4ODM4LCJleHAiOjE1ODA5ODI0MzgsImlhdCI6MTU4MDk3ODgzOH0.4YfNow-AINCTPiu1wkjEAIjY634_FSzUGEfIUyEiirk"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJsdWtlLnNreXdhbGtlckBza3l3YWxrZXItcmFuY2guY29tIiwibmJmIjoxNTgwOTc4ODM4LCJleHAiOjE1ODA5ODI0MzgsImlhdCI6MTU4MDk3ODgzOH0.4YfNow-AINCTPiu1wkjEAIjY634_FSzUGEfIUyEiirk",
+    "refresh": "G5T6yu3dVdpE5/U+hy9hEs7yg7OY3jHRFKB+l7ll87M="
 }
 ````
 
@@ -41,3 +41,30 @@ Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJsdWtl
 ````
 
 Change the method to GET and go to the protected endpoint ````/user````. The request should go through and a response with all the users in the database should be delivered to you.
+
+#### How to refresh the jwt token using the refresh-token
+When the jwt token expires it is no longer valid and can not be used to send requests to the server. You can request a new token by calling the refresh endpoint with the jwt-token and the refresh-token which you acquired when you authenticated.
+````
+endpoint: /auth/refresh
+method: POST
+body:
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJsdWtlLnNreXdhbGtlckBza3l3YWxrZXItcmFuY2guY29tIiwibmJmIjoxNTgwOTc4ODM4LCJleHAiOjE1ODA5ODI0MzgsImlhdCI6MTU4MDk3ODgzOH0.4YfNow-AINCTPiu1wkjEAIjY634_FSzUGEfIUyEiirk",
+    "refresh": "G5T6yu3dVdpE5/U+hy9hEs7yg7OY3jHRFKB+l7ll87M="
+}
+````
+In the response you'll find a new jwt- and refresh-token which you can use to make more calls to the api.
+
+#### How to change the Jwt- and refreshtoken lifetime
+You find the lifetime settings in the appsettings.json file.
+
+````
+{
+  "Auth": {
+    "JwTSecret": "myVerySecretSecret",
+    "JwTLifetimeInMinutes": "1",
+    "RefreshTokenLifetimeInDays":  "1"
+  }
+}
+````
+Itäs good practice to keel the lifetime of the jwt relatively short (1-10 minutes) and the lifetime of the refresh-token a bit longer (1-2 days). You can think of the refresh-token lifetime as the maximum time the user is allowed to be logged in without using the system. 
