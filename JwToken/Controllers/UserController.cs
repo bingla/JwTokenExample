@@ -33,15 +33,15 @@ namespace JwToken.Controllers
         [Route("")]
         public ActionResult<IEnumerable<UserModel>> GetUsers()
         {
-            var result = _userService.GetUsers().WithoutPasswordHashes();
+            var result = _userService.GetUsers()
+                .WithoutPasswordHashes()
+                .WithoutRefreshTokenInfo();
 
             return Ok(result.Select(u => new UserResponse { 
                 Id = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                Email = u.Email,
-                RefreshToken = u.RefreshToken,
-                RefreshTokenExpirationDate = u.RefreshTokenExpirationDate
+                Email = u.Email
             }));
         }
 
