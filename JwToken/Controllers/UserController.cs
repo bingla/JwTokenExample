@@ -41,7 +41,8 @@ namespace JwToken.Controllers
                 Id = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                Email = u.Email
+                Email = u.Email,
+                Role = u.Role,
             }));
         }
 
@@ -58,8 +59,12 @@ namespace JwToken.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Only users with the Admin role are authorized to get the current user
+        /// </summary>
         [HttpGet]
         [Route("current")]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult<UserResponse> GetAuthenticatedUser()
         {
             var result = _authenticationService.GetAuthorizedUser();
@@ -69,7 +74,8 @@ namespace JwToken.Controllers
                 Id = result.Id,
                 FirstName = result.FirstName,
                 LastName = result.LastName,
-                Email = result.Email
+                Email = result.Email,
+                Role = result.Role
             });
         }
     }

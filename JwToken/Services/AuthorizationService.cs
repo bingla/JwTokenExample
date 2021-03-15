@@ -42,12 +42,12 @@ namespace JwToken.Services
 
         public string GenerateJwToken(UserModel user)
         {
-            return _jwTokenGenerator.Generate(_jwtSecret, user.Id, user.Email);
+            return _jwTokenGenerator.Generate(_jwtSecret, user.Id, user.Email, user.Role);
         }
 
         public AuthModel GenerateTokens(UserModel user)
         {
-            var token = _jwTokenGenerator.Generate(_jwtSecret, user.Id, user.Email);
+            var token = _jwTokenGenerator.Generate(_jwtSecret, user.Id, user.Email, user.Role);
             var refreshToken = _refreshTokenGenerator.Generate();
             var refreshTokenExpirationDate = GenerateRefreshTokenExpirationDate();
 

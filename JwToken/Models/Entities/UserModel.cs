@@ -15,6 +15,7 @@ namespace JwToken.Models.Entities
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public string RefreshToken { get; set; }
+        public string Role { get; set; }
         public DateTime? RefreshTokenExpirationDate { get; set; }
     }
 }

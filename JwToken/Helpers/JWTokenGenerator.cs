@@ -18,12 +18,13 @@ namespace JwToken.Helpers
             _jwtLifetimeInMinutes = int.Parse(config.GetValue<string>("Auth:JwTLifetimeInMinutes"));
         }
 
-        public string Generate(string secret, int userId, string userEmail)
+        public string Generate(string secret, int userId, string userEmail, string userRole)
         {
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Email, userEmail),
+                new Claim(ClaimTypes.Role, userRole)
             };
 
             return Generate(secret, claims);

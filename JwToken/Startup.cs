@@ -60,7 +60,7 @@ namespace JwToken
             }
 
             var context = serviceProvider.GetService<ApiContext>();
-            SeedTestData.SeedUsers(context);
+            SeedTestData.SeedData(context);
 
             app.UseHttpsRedirection();
             app.UseRouting();
