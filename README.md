@@ -67,4 +67,7 @@ You find the lifetime settings in the appsettings.json file.
   }
 }
 ````
-Itäs good practice to keel the lifetime of the jwt relatively short (1-10 minutes) and the lifetime of the refresh-token a bit longer (1-2 days). You can think of the refresh-token lifetime as the maximum time the user is allowed to be logged in without using the system. 
+It's good practice to keel the lifetime of the jwt relatively short (1-10 minutes) and the lifetime of the refresh-token a bit longer (1-2 days). You can think of the refresh-token lifetime as the maximum time the user is allowed to be logged in without using the system.
+
+#### User roles
+User roles are stored as strings on the User entities. The roles are added to the claims list when a user performs a successfull login and can be checked by using the [Autorize(Roles = "Role")] decorator.
