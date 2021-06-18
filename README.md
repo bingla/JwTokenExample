@@ -72,6 +72,6 @@ It's good practice to keel the lifetime of the jwt relatively short (1-10 minute
 #### User roles
 User roles are stored as strings on the User entities. The roles are added to the claims list when a user performs a successfull login and can be checked by using the 
 ````
-[Autorize(Roles = "Role")]
+[Authorize(Roles = "Role")]
 ````
 ... decorator in the usual manner.
